@@ -167,6 +167,9 @@ puts JSON.parse(res.body)['verdict']
 | `vpn_asn` | IP intel | ASN classified as a commercial VPN provider |
 | `vpn_org_keyword` | IP intel | ASN org name contains a VPN keyword |
 | `dc_ip` | IP intel | Datacenter or hosting IP |
+| `residential_proxy_backbone` | IP intel | ASN is a known residential-proxy backbone (Leaseweb, CoLoCrossing, Ace DC, QuadraNet, M247, etc.) |
+| `proxy_rdns_pattern` | IP intel | Reverse-DNS matches a proxy backbone domain (`*.colocrossing.com`, `*.acedatacenter.com`, etc.) |
+| `public_proxy_list` | IP intel | IP on one or more free public proxy feeds (TheSpeedX, Proxifly, FireHOL) — 1.9M unique IPs, refreshed every 6h |
 | `mtu_anomaly` | TCP/IP | Non-standard MSS consistent with tunneling |
 | `ttl_os_mismatch` | TCP/IP | TTL doesn't match claimed OS |
 | `tcp_window_anomaly` | TCP/IP | Non-default TCP window |
@@ -177,6 +180,8 @@ puts JSON.parse(res.body)['verdict']
 | `active_probe_wireguard` | Probe | Port 51820 responds to WireGuard |
 | `active_probe_ikev2` | Probe | Port 500 responds to IKEv2 |
 | `active_probe_reality` | Probe | REALITY cert-switch via SNI fuzzing |
+| `active_probe_socks5` | Probe | Live SOCKS5 handshake accepted on a public-proxy-listed port |
+| `active_probe_http_connect` | Probe | Live HTTP CONNECT tunnel accepted (or 407 auth required) on a common proxy port |
 | `tz_mismatch` | Client | Browser timezone differs from IP geo |
 | `lang_mismatch` | Client | Browser language incongruent with region |
 | `webrtc_leak` | Client | WebRTC exposes different public IP |
@@ -215,6 +220,13 @@ puts JSON.parse(res.body)['verdict']
 - **Full docs:** [iplogs.com/docs](https://iplogs.com/docs)
 - **FAQ:** [iplogs.com/faq](https://iplogs.com/faq)
 - **Blog (research-backed posts):** [iplogs.com/blog](https://iplogs.com/blog)
+  - [China's "Great Unplug" (April 2026): Inside the Physical VPN Server Takedown](https://iplogs.com/blog/china-great-unplug-april-2026)
+  - [FBI vs SocksEscort: The 369,000-IP Residential Proxy Botnet Takedown](https://iplogs.com/blog/fbi-socksescort-avrecon-residential-proxy-takedown)
+  - [Iran's 52-Day Internet Blackout (2026): Technical Anatomy](https://iplogs.com/blog/iran-52-day-internet-blackout-2026)
+  - [Russia's 150-Ruble Mobile VPN Tax: Pricing VPNs Out](https://iplogs.com/blog/russia-mobile-vpn-tax-2026)
+  - [REALITY, Xray, and AmneziaWG: The 2026 Anti-Censorship Protocol Stack](https://iplogs.com/blog/reality-xray-amnezia-wg-anti-censorship-2026)
+  - [How to Detect VPN Users in 2026: A Developer's Guide (JS + Server)](https://iplogs.com/blog/how-to-detect-vpn-javascript-server-2026)
+  - [VPN Detection API Comparison (2026): IPQualityScore, IPHub, GetIPIntel, Spur, IPinfo, IPLogs](https://iplogs.com/blog/vpn-detection-api-comparison-2026)
   - [How the Great Firewall of China works in 2026](https://iplogs.com/blog/how-the-great-firewall-of-china-works-2026)
   - [How VPN detection actually works — the 7-layer method](https://iplogs.com/blog/how-vpn-detection-actually-works)
   - [Russia's TSPU: how Roskomnadzor blocks VPNs](https://iplogs.com/blog/russia-tspu-how-it-blocks-vpns)
@@ -223,6 +235,7 @@ puts JSON.parse(res.body)['verdict']
 - **Data pages:**
   - [Live Tor exit-node list](https://iplogs.com/tor-exit-nodes)
   - [Datacenter IP ranges catalog](https://iplogs.com/datacenter-ip-ranges)
+- **Multi-language landing pages:** available at `/l/{locale}` for `zh`, `ru`, `fa`, `ar`, `es`, `pt`, `tr`, `vi`, `id`, `hi`
 
 ---
 
